@@ -3,12 +3,14 @@ require "../../src/watchbird/pattern"
 
 describe WatchBird::Pattern do
   it "should separate fixed path and glob pattern" do
+    Dir.cd("/")
     pat = WatchBird::Pattern.new("/tmp/*")
     pat.fixed.should eq "/tmp/"
     pat.pattern.should eq "/tmp/*"
   end
 
   it "should not separate non-glob pattern" do
+    Dir.cd("/")
     pat = WatchBird::Pattern.new("/tmp/")
     pat.fixed.should eq "/tmp/"
   end

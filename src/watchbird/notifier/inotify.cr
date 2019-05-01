@@ -1,4 +1,4 @@
-require "./event"
+require "../event"
 
 lib LibInotify
   struct Event
@@ -92,7 +92,7 @@ module WatchBird
         size = @io.read(buf.to_slice)
         raise "inotify read() returned 0!" if size == 0
       rescue e : IO::Error
-        if e.message == "closed stream"
+        if e.message == "Closed stream"
           return
         else
           raise e

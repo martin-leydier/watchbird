@@ -57,16 +57,15 @@ module WatchBird
 
     private def register_to_notifeir(pattern)
       @notifier.register(pattern.fixed)
-      Dir.foreach(pattern.fixed) do |name|
-        unless name == "." || name == ".."
-          fullname = pattern.fixed
-          if fullname[-1] != File::SEPARATOR
-            fullname += File::SEPARATOR
-          end
-          fullname += name
-          if Dir.exists?(fullname)
-            @notifier.register(fullname)
-          end
+      Dir.each_child(pattern.fixed) do |name|
+        next if name == "." || name == ".."
+        fullname = pattern.fixed
+        if fullname[-1] != File::SEPARATOR
+          fullname += File::SEPARATOR
+        end
+        fullname += name
+        if Dir.exists?(fullname)
+          @notifier.register(fullname)
         end
       end
     end

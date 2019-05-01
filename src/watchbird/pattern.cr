@@ -17,7 +17,7 @@ module WatchBird
         end
       end
       @fixed = fixed_path
-      if pat[-1] == File::SEPARATOR || @fixed.size < abs_path.size
+      if @fixed[-1] != File::SEPARATOR && (pat[-1] == File::SEPARATOR || @fixed.size < abs_path.size)
         @fixed += File::SEPARATOR
       end
       if @fixed.size < abs_path.size
